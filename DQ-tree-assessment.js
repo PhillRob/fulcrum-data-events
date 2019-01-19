@@ -180,7 +180,7 @@ ON('validate-record', function(event) {
         //photo_quality: '2048',
         //video_quality: '720p',
         //drafts_enabled: false,
-        edit_locations_enabled: false,
+        edit_locations_enabled: false
         //edit_durations_enabled: true
         };
       SETFORMATTRIBUTES(config);
