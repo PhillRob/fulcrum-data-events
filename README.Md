@@ -1,2 +1,2 @@
 # Fulcrum Data Events
-This is a list of all js files that control data event in [fulcrumapp.com](https://www.fulcrumapp.com/)
+This is a list of all js files that control data event in [fulcrumapp.com](https://www.fulcrumapp.com/). Some files are project specific other provide general solutions based on the fulcrum documentation.
