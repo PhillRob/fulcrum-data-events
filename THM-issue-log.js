@@ -49,6 +49,8 @@ ON('edit-record', function(event) {
   if (ISROLE(adminRoles)) {
     SETSTATUSFILTER(null);
   }
+});
+
 
 ON('validate-record', function(event) {
   var adminRoles = ['Inspector','Owner'];
@@ -76,3 +78,5 @@ ON('validate-record', function(event) {
   if (ISROLE(adminRoles)) {
     SETSTATUSFILTER(null);
   }
+});
+
