@@ -4,7 +4,7 @@ This is a list of all js files that control data event in [fulcrumapp.com](https
 Files with uppercase abbreviationsa are project specific:
 - DQ (tree, issue)
 - OSM
-- WS (irrigation, ~~construction, tree~~)
+- WS (irrigation, onstruction, ~~tree~~)
 - WH (tree, issue)
 - ~~KFR (tree, issue)~~
 - ~~KAR (tree, issue)~~
