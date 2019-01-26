@@ -1,10 +1,10 @@
 # Fulcrum Data Events
 This is a list of all js files that control data event in [fulcrumapp.com](https://www.fulcrumapp.com/). 
 
-Files with uppercase abbreviationsa are project specific:
+Files with uppercase abbreviations are project specific:
 - DQ (tree, issue)
 - OSM
-- WS (irrigation, onstruction, tree)
+- WS (irrigation, construction, tree)
 - WH (tree, issue)
 - ~~KFR (tree, issue)~~
 - ~~KAR (tree, issue)~~
