@@ -69,7 +69,7 @@ ON('edit-record', function(event) {
 	//  if RAC site office
 		if (ISROLE(inspector))
 		{var fieldArray = ['number','species','id','transplanting_method','size_of_box','height_m','spread_m','health','structure_','comments','photos']
-		    fieldArray.forEach(function(dataName) 
+			fieldArray.forEach(function(dataName) 
 			{
 				SETREADONLY(dataName, true);
 		    })
