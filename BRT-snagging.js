@@ -1,5 +1,5 @@
 var admin = ['[BP] Inspector','Owner'];
-var inspector = ['[RCA] Site Inspector'];
+var inspector = ['[CON] Site Inspector'];
 
 var storage = STORAGE();
 
