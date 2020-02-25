@@ -30,7 +30,7 @@ ON('validate-record', function(event) {
 		    })
 						
 			SETSTATUSFILTER(['1','2', 'Inspection required']);
-			
+			SETHIDDEN('item_description', true)
 			//  prevent manual location changes
 			var config = {
 				// auto_sync_enabled: true,
@@ -91,7 +91,7 @@ ON('edit-record', function(event) {
 		    })
 						
 			SETSTATUSFILTER(['1','2', 'Inspection required']);
-			
+			SETHIDDEN('item_description', true)
 			//  prevent manual location changes
 			var config = {
 				// auto_sync_enabled: true,
