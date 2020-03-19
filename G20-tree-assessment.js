@@ -1,5 +1,5 @@
 var admin = ['[BP] Inspector','Owner'];
-var inspector = ['[RCA] Site Inspector'];
+var inspector = ['[CON] Site Inspector'];
 
 //  allow [ADA] Site Inspector to only change status to orange if near record location
 ON('validate-record', function(event) {
@@ -7,13 +7,13 @@ ON('validate-record', function(event) {
 	if (ISROLE(inspector))
 		//  if RCA site office
 		{
-			var fieldArray = ['number','species','id','transplanting_method','size_of_box','height_m','spread_m','health','structure_','comments','photos']
-		    fieldArray.forEach(function(dataName) 
-			{
-				SETREADONLY(dataName, true);
-		    })
+			// var fieldArray = ['number','species','id','transplanting_method','size_of_box','height_m','spread_m','health','structure_','comments','photos']
+		    // fieldArray.forEach(function(dataName) 
+			// {
+			// 	SETREADONLY(dataName, true);
+		    // })
 						
-			SETSTATUSFILTER(['Road','RAC Approved']);
+			//SETSTATUSFILTER(['Road','RAC Approved']);
 			
 			//  prevent manual location changes
 			var config = {
@@ -74,7 +74,7 @@ ON('edit-record', function(event) {
 				SETREADONLY(dataName, true);
 		    })
 						
-			SETSTATUSFILTER(['Road','RAC Approved']);
+			// SETSTATUSFILTER(['Road','RAC Approved']);
 			
 			//  prevent manual location changes
 			var config = {
