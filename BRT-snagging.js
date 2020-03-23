@@ -5,16 +5,36 @@ var storage = STORAGE();
 
 // when saving the record, save the value to storage to use next time
 ON('save-record', function(event) {
-  storage.setItem('ref_value', $ref);
-  storage.setItem('picture_ref_value', $picture_ref);
+
+	storage.setItem('ref_value', $ref);
+	storage.setItem('picture_ref_value', $picture_ref);
+
+	if (ISROLE(admin))	
+		{
+		var fieldArray = ['contractor_photos']
+		fieldArray.forEach(function(dataName) 
+			{
+			SETREADONLY(dataName, true);
+			})
+		}
 });
 
 ON('new-record', function(event) {
-  var idStorage = NUM(storage.getItem('ref_value'))+1
-  SETVALUE('ref', idStorage)
   
-  var imgIdStorage = NUM(storage.getItem('picture_ref_value'))+1
-  SETVALUE('picture_ref', imgIdStorage);
+	var idStorage = NUM(storage.getItem('ref_value'))+1
+	SETVALUE('ref', idStorage)
+
+	var imgIdStorage = NUM(storage.getItem('picture_ref_value'))+1
+	SETVALUE('picture_ref', imgIdStorage);
+
+	if (ISROLE(admin))	
+		{
+		var fieldArray = ['contractor_photos']
+		fieldArray.forEach(function(dataName) 
+			{
+			SETREADONLY(dataName, true);
+			})
+		}
 });
 
 //  allow [ADA] Site Inspector to only change status to orange if near record location
@@ -76,6 +96,12 @@ ON('validate-record', function(event) {
 		 //  if the current role is one of the designated admin roles...
 		if (ISROLE(admin))	
 			{
+				var fieldArray = ['contractor_photos']
+				fieldArray.forEach(function(dataName) 
+				{
+					SETREADONLY(dataName, true);
+		    	})
+
 			 SETSTATUSFILTER(null);
 			 }
 });
@@ -84,7 +110,8 @@ ON('edit-record', function(event) {
 		
 	//  if RAC site office
 		if (ISROLE(inspector))
-		{var fieldArray = ['ref','road','side_','location','picture_ref','item_description','photos','videos','picture_id','unique_id']
+		{
+			var fieldArray = ['ref','road','side_','location','picture_ref','item_description','photos','videos','picture_id','unique_id']
 			fieldArray.forEach(function(dataName) 
 			{
 				SETREADONLY(dataName, true);
@@ -136,7 +163,13 @@ ON('edit-record', function(event) {
 
 		 //  if the current role is one of the designated admin roles...
 		if (ISROLE(admin))	
-			{
+			 {
+				var fieldArray = ['contractor_photos']
+				fieldArray.forEach(function(dataName) 
+				{
+					SETREADONLY(dataName, true);
+		    	})
+			 
 			 SETSTATUSFILTER(null);
 			 }
 });

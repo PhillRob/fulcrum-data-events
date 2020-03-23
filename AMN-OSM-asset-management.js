@@ -1,17 +1,18 @@
-      var config = {
-      //auto_sync_enabled: true,
-      //auto_location_enabled: true,
-      auto_location_minimum_accuracy: 20,
-      //manual_location_enabled: false,
-      //media_gallery_enabled: false,
-      //media_capture_enabled: true,
-      //photo_quality: '2048',
-      //video_quality: '720p',
-      drafts_enabled: false
-      //edit_locations_enabled: true,
-      //edit_durations_enabled: true
-      };
-      SETFORMATTRIBUTES(config);
+var config = {
+  //auto_sync_enabled: true,
+  //auto_location_enabled: true,
+  auto_location_minimum_accuracy: 20,
+  //manual_location_enabled: false,
+  //media_gallery_enabled: false,
+  //media_capture_enabled: true,
+  //photo_quality: '2048',
+  //video_quality: '720p',
+  drafts_enabled: false
+  //edit_locations_enabled: true,
+  //edit_durations_enabled: true
+};
+
+SETFORMATTRIBUTES(config);
 
 ///[ADA] Site Inspector is used for AMN too
 //allow user [ADA] Site Inspector to NOT create records
