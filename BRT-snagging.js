@@ -43,7 +43,7 @@ ON('validate-record', function(event) {
 	if (ISROLE(inspector))
 		//  if RCA site office
 		{
-			var fieldArray = ['ref','road','side_','location','picture_ref','item_description','photos','videos','picture_id','unique_id']
+			var fieldArray = ['ref','road','side_','phase','location','picture_ref','item_description','photos','videos','picture_id','unique_id']
 		    fieldArray.forEach(function(dataName) 
 			{
 				SETREADONLY(dataName, true);
@@ -111,7 +111,7 @@ ON('edit-record', function(event) {
 	//  if RAC site office
 		if (ISROLE(inspector))
 		{
-			var fieldArray = ['ref','road','side_','location','picture_ref','item_description','photos','videos','picture_id','unique_id']
+			var fieldArray = ['ref','road','side_','phase','location','picture_ref','item_description','photos','videos','picture_id','unique_id']
 			fieldArray.forEach(function(dataName) 
 			{
 				SETREADONLY(dataName, true);
