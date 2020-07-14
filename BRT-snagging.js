@@ -1,3 +1,6 @@
+// data events for fulcrum app [BRT] Streetscape (d7291c0c-081f-4296-a24e-af2e96e41fcf)
+// version 1.4
+
 var admin = ['[BP] Inspector','Owner'];
 var inspector = ['[CON] Site Inspector'];
 
