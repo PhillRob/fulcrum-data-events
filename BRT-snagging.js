@@ -67,7 +67,9 @@ ON('validate-record', function(event) {
 				};
 
 			SETFORMATTRIBUTES(config);
-
+			if (!PROJECTNAME()) {
+    			INVALID('Please select a project before saving.');
+  			};	
 
 			// lat = LATITUDE();
 			// lng = LONGITUDE();
