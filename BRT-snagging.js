@@ -1,5 +1,5 @@
 // data events for fulcrum app [BRT] Streetscape (d7291c0c-081f-4296-a24e-af2e96e41fcf)
-// version 1.4
+// version 1.4.1
 
 var admin = ['[BP] Inspector','Owner'];
 var inspector = ['[CON] Site Inspector'];
@@ -8,7 +8,7 @@ var storage = STORAGE();
 
 // when saving the record, save the value to storage to use next time
 ON('save-record', function(event) {
-
+  
 	storage.setItem('ref_value', $ref);
 	storage.setItem('picture_ref_value', $picture_ref);
 
@@ -23,14 +23,13 @@ ON('save-record', function(event) {
 });
 
 ON('new-record', function(event) {
+  var idStorage = NUM(storage.getItem('ref_value'))+1
+  SETVALUE('ref', idStorage)
   
-	var idStorage = NUM(storage.getItem('ref_value'))+1
-	SETVALUE('ref', idStorage)
+  var imgIdStorage = NUM(storage.getItem('picture_ref_value'))+1
+  SETVALUE('picture_ref', imgIdStorage);
 
-	var imgIdStorage = NUM(storage.getItem('picture_ref_value'))+1
-	SETVALUE('picture_ref', imgIdStorage);
-
-	if (ISROLE(admin))	
+  if (ISROLE(admin))	
 		{
 		var fieldArray = ['contractor_photos']
 		fieldArray.forEach(function(dataName) 
@@ -46,7 +45,7 @@ ON('validate-record', function(event) {
 	if (ISROLE(inspector))
 		//  if RCA site office
 		{
-			var fieldArray = ['ref','road','side_','phase','location','picture_ref','item_description','photos','videos','picture_id','unique_id']
+			var fieldArray = ['ref','road','side_','location','picture_ref','item_description','photos','videos','picture_id','unique_id']
 		    fieldArray.forEach(function(dataName) 
 			{
 				SETREADONLY(dataName, true);
@@ -54,6 +53,7 @@ ON('validate-record', function(event) {
 						
 			SETSTATUSFILTER(['1','2', 'Inspection required']);
 			SETHIDDEN('item_description', true)
+			SETHIDDEN('phase', true)
 			//  prevent manual location changes
 			var config = {
 				// auto_sync_enabled: true,
@@ -70,10 +70,7 @@ ON('validate-record', function(event) {
 				};
 
 			SETFORMATTRIBUTES(config);
-			if (!PROJECTNAME()) {
-    			INVALID('Please select a project before saving.');
-  			};	
-
+			
 			// lat = LATITUDE();
 			// lng = LONGITUDE();
 			// var location = CURRENTLOCATION();
@@ -108,6 +105,9 @@ ON('validate-record', function(event) {
 		    	})
 
 			 SETSTATUSFILTER(null);
+			 if (!PROJECTNAME()) {
+    			INVALID('Please select a project before saving.');
+  				};
 			 }
 });
 
@@ -116,7 +116,7 @@ ON('edit-record', function(event) {
 	//  if RAC site office
 		if (ISROLE(inspector))
 		{
-			var fieldArray = ['ref','road','side_','phase','location','picture_ref','item_description','photos','videos','picture_id','unique_id']
+			var fieldArray = ['ref','road','side_','location','picture_ref','item_description','photos','videos','picture_id','unique_id']
 			fieldArray.forEach(function(dataName) 
 			{
 				SETREADONLY(dataName, true);
@@ -124,6 +124,7 @@ ON('edit-record', function(event) {
 						
 			SETSTATUSFILTER(['1','2', 'Inspection required']);
 			SETHIDDEN('item_description', true)
+			SETHIDDEN('phase', true)
 			//  prevent manual location changes
 			var config = {
 				// auto_sync_enabled: true,
