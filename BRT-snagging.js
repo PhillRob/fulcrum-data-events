@@ -1,5 +1,5 @@
 // data events for fulcrum app [BRT] Streetscape (d7291c0c-081f-4296-a24e-af2e96e41fcf)
-// version 1.4.1
+// version 1.5
 
 var admin = ['[BP] Inspector','Owner'];
 var inspector = ['[CON] Site Inspector'];
@@ -41,7 +41,7 @@ ON('new-record', function(event) {
 
 //  allow [ADA] Site Inspector to only change status to orange if near record location
 ON('validate-record', function(event) {
-	
+
 	if (ISROLE(inspector))
 		//  if RCA site office
 		{
@@ -52,7 +52,7 @@ ON('validate-record', function(event) {
 		    })
 						
 			SETSTATUSFILTER(['1','2', 'Inspection required']);
-			SETHIDDEN('item_description', true)
+			SETHIDDEN('item_description', false)
 			SETHIDDEN('phase', true)
 			//  prevent manual location changes
 			var config = {
@@ -123,8 +123,16 @@ ON('edit-record', function(event) {
 		    })
 						
 			SETSTATUSFILTER(['1','2', 'Inspection required']);
-			SETHIDDEN('item_description', true)
+			SETHIDDEN('item_description', false)
 			SETHIDDEN('phase', true)
+			
+
+			if((admin.indexOf($updated_by_role)!== -1) && 'no'.indexOf($3rd_party_damage)!== -1)
+       		{
+				ALERT('Client and Consultant have agreed that this item is not a 3rd party damage. You cannot change the 3rd party damage field anymore.');
+				SETREADONLY('3rd_party_damage', true);
+			}
+
 			//  prevent manual location changes
 			var config = {
 				// auto_sync_enabled: true,
