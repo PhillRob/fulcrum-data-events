@@ -6,7 +6,7 @@ var inspector = ['[CON] Site Inspector'];
 
 var storage = STORAGE();
 
-// when saving the record, save the value to storage to use next time
+// Auto-increment feature: when saving the record, save the value to storage to use next time. 
 ON('save-record', function(event) {
   
 	storage.setItem('ref_value', $ref);
@@ -39,11 +39,11 @@ ON('new-record', function(event) {
 		}
 });
 
-//  allow [ADA] Site Inspector to only change status to orange if near record location
+
 ON('validate-record', function(event) {
 
 	if (ISROLE(inspector))
-		//  if RCA site office
+		//  if contractor
 		{
 			var fieldArray = ['ref','road','side_','location','picture_ref','item_description','photos','videos','picture_id','unique_id']
 		    fieldArray.forEach(function(dataName) 
@@ -54,6 +54,7 @@ ON('validate-record', function(event) {
 			SETSTATUSFILTER(['1','2', 'Inspection required']);
 			SETHIDDEN('item_description', false)
 			SETHIDDEN('phase', true)
+			
 			//  prevent manual location changes
 			var config = {
 				// auto_sync_enabled: true,
@@ -95,7 +96,7 @@ ON('validate-record', function(event) {
 			// 	}
 		}
 
-		 //  if the current role is one of the designated admin roles...
+		 //  admin permissions
 		if (ISROLE(admin))	
 			{
 				var fieldArray = ['contractor_photos']
@@ -113,7 +114,7 @@ ON('validate-record', function(event) {
 
 ON('edit-record', function(event) {
 		
-	//  if RAC site office
+	//  contractor permissions
 		if (ISROLE(inspector))
 		{
 			var fieldArray = ['ref','road','side_','location','picture_ref','item_description','photos','videos','picture_id','unique_id']
@@ -175,7 +176,7 @@ ON('edit-record', function(event) {
 			// 	}
 		}
 
-		 //  if the current role is one of the designated admin roles...
+		 //  admin permissions
 		if (ISROLE(admin))	
 			 {
 				var fieldArray = ['contractor_photos']
