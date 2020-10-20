@@ -1,3 +1,5 @@
+// KFR tree assessment
+// v1.1
 var config = {
         //auto_sync_enabled: true,
         auto_location_enabled: false,
