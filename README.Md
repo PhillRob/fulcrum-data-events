@@ -10,6 +10,7 @@ Files with uppercase abbreviations are project specific:
 - KAR (tree, ~~issue)~~
 - THM (issue, ~~elements)~~
 - G20 tree assessment
-- BRT (CBS Snagging, Streetscape v1.5) including data events for station lookup
+- BRT CBS Snagging v1.5 (including data events for station lookup)
+- BRT Streetscape v1.5 (including data events for station lookup)
 
 Files with lower case file names provide general solutions based on the [fulcrum documentation](https://developer.fulcrumapp.com/data-events/examples/).
