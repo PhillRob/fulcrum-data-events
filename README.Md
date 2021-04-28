@@ -14,3 +14,13 @@ Files with uppercase abbreviations are project specific:
 - BRT Streetscape v1.5 (including data events for station lookup)
 
 Files with lower case file names provide general solutions based on the [fulcrum documentation](https://developer.fulcrumapp.com/data-events/examples/).
+
+- geofencing.js
+- gps-info.js
+- repeatable-fields-access-restrictions.js
+- fulcrum-digitise-line-location-dependent.js
+
+As fulcrum permits to batch export PDF reports only with the internal id as a name a couple of file management toys come in handy. 
+
+- fulcrum-file-rename.sh
+- fulcrum-file-delete.sh
