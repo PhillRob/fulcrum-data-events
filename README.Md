@@ -19,7 +19,9 @@ Files with lower case file names provide general solutions based on the [fulcrum
 - gps-info.js
 - repeatable-fields-access-restrictions.js
 - fulcrum-digitise-line-location-dependent.js
+- populate-by-distance.js: returns ID of the closed geoJSON feature (included in script)
 
+# Batch scripts for file naming
 As fulcrum permits to batch export PDF reports only with the internal id as a name a couple of file management toys come in handy. 
 
 - fulcrum-file-rename.sh
