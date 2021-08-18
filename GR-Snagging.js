@@ -1,36 +1,55 @@
+// data events for fulcrum app [GR] Snagging (ae9c99e0-0f90-4439-8094-1a9f9943171c)
+// version 0.5
+
 var admin = ['[BP] Inspector','Owner'];
 var inspector = ['[CON] Site Inspector'];
 
-
 var storage = STORAGE();
 
-// when saving the record, save the value to storage to use next time
+// Auto-increment feature: when saving the record, save the value to storage to use next time. 
 ON('save-record', function(event) {
   
-	storage.setItem('ref_value', $number);
+	storage.setItem('ref_value', $id);
 
+	if (ISROLE(admin))	
+		{
+		var fieldArray = ['contractor_photos','contractor_remarks']
+		fieldArray.forEach(function(dataName) 
+			{
+			SETREADONLY(dataName, true);
+			})
+		}
 });
 
 ON('new-record', function(event) {
   var idStorage = NUM(storage.getItem('ref_value'))+1
-  SETVALUE('ref', idStorage)
+  SETVALUE('id', idStorage)
+
+  if (ISROLE(admin))	
+		{
+        var fieldArray = ['contractor_photos','contractor_remarks']
+		fieldArray.forEach(function(dataName) 
+			{
+			SETREADONLY(dataName, true);
+			})
+		}
 });
 
 
-
-//  allow [ADA] Site Inspector to only change status to orange if near record location
 ON('validate-record', function(event) {
-	
+
 	if (ISROLE(inspector))
-		//  if RCA site office
+		//  if contractor
 		{
-			// var fieldArray = ['number','species','id','transplanting_method','size_of_box','height_m','spread_m','health','structure_','comments','photos']
-		    // fieldArray.forEach(function(dataName) 
-			// {
-			// 	SETREADONLY(dataName, true);
-		    // })
+			var fieldArray = ['id','road','roadside','station_from','station_to','discipline','element','photos','defect','remakrs']
+		    fieldArray.forEach(function(dataName) 
+			{
+				SETREADONLY(dataName, true);
+		    })
 						
-			//SETSTATUSFILTER(['Road','RAC Approved']);
+			SETSTATUSFILTER(['High','Low', 'Re-inspection required']);
+			//SETHIDDEN('item_description', false)
+			//SETHIDDEN('phase', true)
 			
 			//  prevent manual location changes
 			var config = {
@@ -48,8 +67,7 @@ ON('validate-record', function(event) {
 				};
 
 			SETFORMATTRIBUTES(config);
-
-
+			
 			// lat = LATITUDE();
 			// lng = LONGITUDE();
 			// var location = CURRENTLOCATION();
@@ -74,25 +92,44 @@ ON('validate-record', function(event) {
 			// 	}
 		}
 
-		 //  if the current role is one of the designated admin roles...
+		 //  admin permissions
 		if (ISROLE(admin))	
 			{
+				var fieldArray = ['contractor_photos','contractor_remarks']
+				fieldArray.forEach(function(dataName) 
+				{
+					SETREADONLY(dataName, true);
+		    	})
+
 			 SETSTATUSFILTER(null);
+			 //if (!PROJECTNAME()) {
+    			//INVALID('Please select a project before saving.');
+  				//};
 			 }
 });
 
 ON('edit-record', function(event) {
 		
-	//  if RAC site office
+	//  contractor permissions
 		if (ISROLE(inspector))
-		{var fieldArray = ['number','species','id','transplanting_method','size_of_box','height_m','spread_m','health','structure_','comments','photos']
+		{
+			var fieldArray = ['id','road','roadside','station_from','station_to','discipline','element','photos','defect','remakrs']
 			fieldArray.forEach(function(dataName) 
 			{
 				SETREADONLY(dataName, true);
 		    })
 						
-			// SETSTATUSFILTER(['Road','RAC Approved']);
+			SETSTATUSFILTER(['High','Low', 'Re-inspection required']);
+			//SETHIDDEN('item_description', false)
+			//SETHIDDEN('phase', true)
 			
+
+			//if((admin.indexOf($updated_by_role)!== -1) && 'no'.indexOf($3rd_party_damage)!== -1)
+       		//{
+			//	ALERT('Client and Consultant have agreed that this item is not a 3rd party damage. You cannot change the 3rd party damage field anymore.');
+			//	SETREADONLY('3rd_party_damage', true);
+			//}
+
 			//  prevent manual location changes
 			var config = {
 				// auto_sync_enabled: true,
@@ -135,9 +172,15 @@ ON('edit-record', function(event) {
 			// 	}
 		}
 
-		 //  if the current role is one of the designated admin roles...
+		 //  admin permissions
 		if (ISROLE(admin))	
-			{
+			 {
+				var fieldArray = ['contractor_photos','contactor_remarks']
+				fieldArray.forEach(function(dataName) 
+				{
+					SETREADONLY(dataName, true);
+		    	})
+			 
 			 SETSTATUSFILTER(null);
 			 }
 });
