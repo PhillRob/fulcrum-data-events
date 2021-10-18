@@ -6,6 +6,12 @@ var inspector = ['[CON] Site Inspector'];
 
 var storage = STORAGE();
 
+ON('add-photo', 'photos', function(event) {
+	if (event.value.width < event.value.height) {
+	  INVALID('Please retake the photo in landscape orientation.');
+	}
+  });
+
 // Auto-increment feature: when saving the record, save the value to storage to use next time. 
 ON('save-record', function(event) {
   

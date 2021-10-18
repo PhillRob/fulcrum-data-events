@@ -9,7 +9,8 @@ Files with uppercase abbreviations are project specific:
 - ~~KFR (tree, issue)~~
 - KAR (tree, ~~issue)~~
 - THM (issue, ~~elements)~~
-- G20 tree assessment
+- GR tree assessment
+- GR Snagging
 - BRT CBS Snagging v1.5 (including data events for station lookup)
 - BRT Streetscape v1.5 (including data events for station lookup)
 
@@ -26,3 +27,19 @@ As fulcrum permits to batch export PDF reports only with the internal id as a na
 
 - fulcrum-file-rename.sh
 - fulcrum-file-delete.sh
+
+# Custom Report Code
+Those are customised report files based ton the fulcum documentation. 
+
+## GR Snagging Report Badan
+- body
+- header
+- footer
+- styles
+- script
+## GR Snagging Report Zaid
+- body
+- header
+- footer
+- styles
+- script    
