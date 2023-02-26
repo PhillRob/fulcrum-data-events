@@ -28,14 +28,15 @@ SETFORMATTRIBUTES(config);
 
 var admin = ['[BP] Inspector','Owner'];
 var inspector = ['[ADA] Site Office'];
-var contractor = ['[ADA] Site Inspector'];
+var contractor = ['[CON] Site Inspector'];
 var treenumber = ['[ADA][DQ] Tree Number']
+
 //allow user [ADA] Site Inspector to NOT create record
 ON('new-record', function(event) {
-	// if current role is not admin, inspector but [ADA] Site
-	if (ISROLE(contractor))
+  // if current role is not admin, inspector but [ADA] Site
+  if (ISROLE(contractor))
     {
-    	// restrict contractor access to fields
+      // restrict contractor access to fields
       // contractor can set status and fill general data
       var fieldArray = ['tree_id_','type_of_treatment_',
       'product_',
@@ -50,7 +51,9 @@ ON('new-record', function(event) {
       'irrigation_sufficient_',
       'work_order_',
       'maintenance_date_',
-      'responsible_team_']
+      'responsible_team_',
+      'detected_by_ml',
+      'special_irrigation']
       fieldArray.forEach(function(dataName) 
       {
       SETREADONLY(dataName, true);
@@ -88,7 +91,9 @@ if (ISROLE(treenumber))
       'irrigation_sufficient_',
       'work_order_',
       'maintenance_date_',
-      'responsible_team_']
+      'responsible_team_',
+      'detected_by_ml',
+      'special_irrigation']
       fieldArray.forEach(function(dataName) 
       {
       SETREADONLY(dataName, true);
@@ -128,19 +133,21 @@ if (ISROLE(treenumber))
       'irrigation_sufficient_',
       'work_order_',
       'maintenance_date_',
-      'responsible_team_']
+      'responsible_team_',
+       'detected_by_ml',
+      'special_irrigation']
       
       fieldArray.forEach(function(dataName) 
       {
       SETREADONLY(dataName, true);
       });
-      SETSTATUSFILTER(['Re-inspection - إعادة التفتيش','Surveyed - شجرة فحص','Action Required - عمل','No Action Required - نجز','Request for approval - طلب موافقة','Hazard Action - فعل خطر','On Hold - تحت الانتظار']);
+      SETSTATUSFILTER(['Re-inspection - إعادة التفتيش','Surveyed - شجرة فحص','Action Required - عمل','No Action Required - نجز','Request for approval - طلب موافقة','Hazard Action - فعل خطر','On Hold - تحت الانتظار','Irrigation check needed - فحص الري مطلوب']);
     }
    if (ISROLE(admin))
    {
-  	   // if the current role is one of the designated admin roles...
-	     //do nothing
-  	}
+       // if the current role is one of the designated admin roles...
+       //do nothing
+    }
 });
 
 ON('validate-record', function(event) {
@@ -162,14 +169,15 @@ ON('validate-record', function(event) {
       'irrigation_sufficient_',
       'work_order_',
       'maintenance_date_',
-      'responsible_team_']
+      'responsible_team_', 'detected_by_ml',
+      'special_irrigation']
       fieldArray.forEach(function(dataName) 
       {
       SETREADONLY(dataName, true);
       });
 
       // limit status selection
-      SETSTATUSFILTER(['Re-inspection - إعادة التفتيش','Surveyed - شجرة فحص','Request for approval - طلب موافقة']);
+      SETSTATUSFILTER(['Re-inspection - إعادة التفتيش','Surveyed - شجرة فحص','Request for approval - طلب موافقة','Irrigation check needed - فحص الري مطلوب']);
       var config = {
         //auto_sync_enabled: true,
         //auto_location_enabled: true,
@@ -180,7 +188,7 @@ ON('validate-record', function(event) {
         //photo_quality: '2048',
         //video_quality: '720p',
         //drafts_enabled: false,
-        edit_locations_enabled: false
+        edit_locations_enabled: false,
         //edit_durations_enabled: true
         };
       SETFORMATTRIBUTES(config);
@@ -222,7 +230,8 @@ ON('validate-record', function(event) {
       'irrigation_present_',
       'irrigation_sufficient_',
       'work_order_',
-      'maintenance_date_',
+      'maintenance_date_', 'detected_by_ml',
+      'special_irrigation',
       'responsible_team_']
       fieldArray.forEach(function(dataName) 
       {
@@ -260,7 +269,8 @@ ON('validate-record', function(event) {
       'irrigation_present_',
       'irrigation_sufficient_',
       'work_order_',
-      'maintenance_date_',
+      'maintenance_date_', 'detected_by_ml',
+      'special_irrigation',
       'responsible_team_']
       fieldArray.forEach(function(dataName) 
       {
@@ -268,7 +278,7 @@ ON('validate-record', function(event) {
       });
 
       // limit status selection
-      SETSTATUSFILTER(['Re-inspection - إعادة التفتيش','Surveyed - شجرة فحص','Action Required - عمل','No Action Required - نجز','Request for approval - طلب موافقة','Hazard Action - فعل خطر','On Hold - تحت الانتظار']);
+      SETSTATUSFILTER(['Irrigation check needed - فحص الري مطلوب','Re-inspection - إعادة التفتيش','Surveyed - شجرة فحص','Action Required - عمل','No Action Required - نجز','Request for approval - طلب موافقة','Hazard Action - فعل خطر','On Hold - تحت الانتظار']);
       
       //validate loaction
       lat = LATITUDE();
@@ -317,13 +327,14 @@ ON('edit-record', function(event) {
       'irrigation_sufficient_',
       'work_order_',
       'maintenance_date_',
-      'responsible_team_']
+      'responsible_team_', 'detected_by_ml',
+      'special_irrigation']
       fieldArray.forEach(function(dataName) 
       {
       SETREADONLY(dataName, true);
       });
       // limit status selection
-      SETSTATUSFILTER(['Re-inspection - إعادة التفتيش','Surveyed - شجرة فحص','Request for approval - طلب موافقة']);
+      SETSTATUSFILTER(['Re-inspection - إعادة التفتيش','Surveyed - شجرة فحص','Request for approval - طلب موافقة','Irrigation check needed - فحص الري مطلوب']);
 
       //turn location editing off
       var config = {
@@ -377,7 +388,8 @@ if (ISROLE(treenumber))
       'irrigation_present_',
       'irrigation_sufficient_',
       'work_order_',
-      'maintenance_date_',
+      'maintenance_date_', 'detected_by_ml',
+      'special_irrigation',
       'responsible_team_']
       fieldArray.forEach(function(dataName) 
       {
@@ -416,7 +428,8 @@ if (ISROLE(treenumber))
       'irrigation_sufficient_',
       'work_order_',
       'maintenance_date_',
-      'responsible_team_']
+      'responsible_team_', 'detected_by_ml',
+      'special_irrigation']
       fieldArray.forEach(function(dataName) 
 
       {
@@ -424,7 +437,7 @@ if (ISROLE(treenumber))
       });
 
       // limit status selection
-      SETSTATUSFILTER(['Re-inspection - إعادة التفتيش','Surveyed - شجرة فحص','Action Required - عمل','No Action Required - نجز','Request for approval - طلب موافقة','Hazard Action - فعل خطر','On Hold - تحت الانتظار']);
+      SETSTATUSFILTER(['Re-inspection - إعادة التفتيش','Surveyed - شجرة فحص','Action Required - عمل','No Action Required - نجز','Request for approval - طلب موافقة','Hazard Action - فعل خطر','On Hold - تحت الانتظار','Irrigation check needed - فحص الري مطلوب']);
       
       //validate loaction
       lat = LATITUDE();
