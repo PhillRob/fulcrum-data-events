@@ -38,7 +38,8 @@ ON('new-record', function(event) {
     {
       // restrict contractor access to fields
       // contractor can set status and fill general data
-      var fieldArray = ['tree_id_','type_of_treatment_',
+      var fieldArray = ['tree_id_',
+      'type_of_treatment_',
       'product_',
       'product__other',
       'pest_control_date_',
@@ -58,7 +59,7 @@ ON('new-record', function(event) {
       {
       SETREADONLY(dataName, true);
       });
-      SETSTATUSFILTER(['Re-inspection - إعادة التفتيش','Surveyed - شجرة فحص']);
+      SETSTATUSFILTER(['Re-inspection - إعادة التفتيش','Urgent irrigation - للري بشكل عاجل']);
       var config = {
         //auto_sync_enabled: true,
         //auto_location_enabled: true,
@@ -78,7 +79,9 @@ if (ISROLE(treenumber))
     {
       // restrict contractor access to fields
       // contractor can set status and fill general data
-      var fieldArray = ['species','photos','dbh_cm_','height_m','spread_m','tree_age_','comments','health','structure_','type_of_treatment_',
+      var fieldArray = ['species',
+      'photos',
+      'dbh_cm_','height_m','spread_m','tree_age_','comments','health','structure_','type_of_treatment_',
       'product_',
       'product__other',
       'pest_control_date_',
@@ -120,22 +123,23 @@ if (ISROLE(treenumber))
     {
       // restrict inspector access to fields
       // inspector can set status and fill general data
-      var fieldArray = ['tree_id_','type_of_treatment_',
-      'product_',
-      'product__other',
-      'pest_control_date_',
-      'fertiliser_',
-      'fertiliser__other',
-      'fertiliser_date_',
-      'decompacted_date_',
-      'decompacted_',
-      'irrigation_present_',
-      'irrigation_sufficient_',
-      'work_order_',
-      'maintenance_date_',
-      'responsible_team_',
-       'detected_by_ml',
-      'special_irrigation']
+      var fieldArray = ['tree_id_',
+        'type_of_treatment_',
+        'product_',
+        'product__other',
+        'pest_control_date_',
+        'fertiliser_',
+        'fertiliser__other',
+        'fertiliser_date_',
+        'decompacted_date_',
+        'decompacted_',
+        'irrigation_present_',
+        'irrigation_sufficient_',
+        'work_order_',
+        'maintenance_date_',
+        'responsible_team_',
+         'detected_by_ml',
+        'special_irrigation']
       
       fieldArray.forEach(function(dataName) 
       {
@@ -156,28 +160,39 @@ ON('validate-record', function(event) {
     {
       // restrict contractor access to fields
       // contractor can set status and fill general data
-      var fieldArray = ['tree_id_','area_code_','species','photos','dbh_cm_','height_m','spread_m','tree_age_','comments','health','structure_','type_of_treatment_',
-      'product_',
-      'product__other',
-      'pest_control_date_',
-      'fertiliser_',
-      'fertiliser__other',
-      'fertiliser_date_',
-      'decompacted_date_',
-      'decompacted_',
-      'irrigation_present_',
-      'irrigation_sufficient_',
-      'work_order_',
-      'maintenance_date_',
-      'responsible_team_', 'detected_by_ml',
-      'special_irrigation']
+      var fieldArray = ['tree_id_',
+        'area_code_',
+        'species',
+        // 'photos',
+        'dbh_cm_',
+        'height_m',
+        'spread_m',
+        'tree_age_',
+        'comments',
+        'health',
+        'structure_',
+        'type_of_treatment_',
+        'product_',
+        'product__other',
+        'pest_control_date_',
+        'fertiliser_',
+        'fertiliser__other',
+        'fertiliser_date_',
+        'decompacted_date_',
+        'decompacted_',
+        'irrigation_present_',
+        'irrigation_sufficient_',
+        'work_order_',
+        'maintenance_date_',
+        'responsible_team_', 'detected_by_ml',
+        'special_irrigation']
       fieldArray.forEach(function(dataName) 
       {
       SETREADONLY(dataName, true);
       });
 
       // limit status selection
-      SETSTATUSFILTER(['Re-inspection - إعادة التفتيش','Surveyed - شجرة فحص','Request for approval - طلب موافقة','Irrigation check needed - فحص الري مطلوب']);
+      SETSTATUSFILTER(['Urgent irrigation - للري بشكل عاجل','Irrigation check needed - فحص الري مطلوب']);
       var config = {
         //auto_sync_enabled: true,
         //auto_location_enabled: true,
@@ -218,21 +233,32 @@ ON('validate-record', function(event) {
     {
       // restrict contractor access to fields
       // contractor can set status and fill general data
-      var fieldArray = ['species','photos','dbh_cm_','height_m','spread_m','tree_age_','comments','health','structure_','type_of_treatment_',
-      'product_',
-      'product__other',
-      'pest_control_date_',
-      'fertiliser_',
-      'fertiliser__other',
-      'fertiliser_date_',
-      'decompacted_date_',
-      'decompacted_',
-      'irrigation_present_',
-      'irrigation_sufficient_',
-      'work_order_',
-      'maintenance_date_', 'detected_by_ml',
-      'special_irrigation',
-      'responsible_team_']
+      var fieldArray = ['species',
+        'photos',
+        'dbh_cm_',
+        'height_m',
+        'spread_m',
+        'tree_age_',
+        'comments',
+        'health',
+        'structure_',
+        'type_of_treatment_',
+        'product_',
+        'product__other',
+        'pest_control_date_',
+        'fertiliser_',
+        'fertiliser__other',
+        'fertiliser_date_',
+        'decompacted_date_',
+        'decompacted_',
+        'irrigation_present_',
+        'irrigation_sufficient_',
+        'work_order_',
+        'maintenance_date_',
+        'detected_by_ml',
+        'special_irrigation',
+        'responsible_team_']
+
       fieldArray.forEach(function(dataName) 
       {
       SETREADONLY(dataName, true);
@@ -257,7 +283,8 @@ ON('validate-record', function(event) {
     {
       // restrict inspector access to fields
       // inspector can set status and fill general data
-      var fieldArray = ['tree_id_','area_code_','species','photos','dbh_cm_','height_m','spread_m','tree_age_','comments','health','structure_','type_of_treatment_',
+      var fieldArray = ['tree_id_',
+        'area_code_','species','photos','dbh_cm_','height_m','spread_m','tree_age_','comments','health','structure_','type_of_treatment_',
       'product_',
       'product__other',
       'pest_control_date_',
@@ -314,7 +341,11 @@ ON('edit-record', function(event) {
     {
       // restrict contractor access to fields
       // contractor can set status and fill general data
-      var fieldArray = ['tree_id_','area_code_','species','photos','dbh_cm_','height_m','spread_m','tree_age_','comments','health','structure_','type_of_treatment_',
+      var fieldArray = ['tree_id_',
+        'area_code_',
+        'species',
+        // 'photos',
+        'dbh_cm_','height_m','spread_m','tree_age_','comments','health','structure_','type_of_treatment_',
       'product_',
       'product__other',
       'pest_control_date_',
@@ -334,7 +365,7 @@ ON('edit-record', function(event) {
       SETREADONLY(dataName, true);
       });
       // limit status selection
-      SETSTATUSFILTER(['Re-inspection - إعادة التفتيش','Surveyed - شجرة فحص','Request for approval - طلب موافقة','Irrigation check needed - فحص الري مطلوب']);
+      SETSTATUSFILTER(['Urgent irrigation - للري بشكل عاجل','Irrigation check needed - فحص الري مطلوب']);
 
       //turn location editing off
       var config = {
