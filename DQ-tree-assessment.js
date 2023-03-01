@@ -29,18 +29,69 @@ SETFORMATTRIBUTES(config);
 var admin = ['[BP] Inspector','Owner'];
 var inspector = ['[ADA] Site Office'];
 var contractor = ['[CON] Site Inspector'];
-var treenumber = ['[ADA][DQ] Tree Number']
+var treenumber = ['[ADA][DQ] Tree Number'];
 
 //allow user [ADA] Site Inspector to NOT create record
 ON('new-record', function(event) {
   // if current role is not admin, inspector but [ADA] Site
-  if (ISROLE(contractor))
-    {
+  if (ISROLE(contractor)) {
+      if(ISSELECTED($species, 'Phoenix dactylifera - نخيل البلح')) 
+      {
+
       // restrict contractor access to fields
       // contractor can set status and fill general data
+      
       var fieldArray = ['tree_id_',
       'type_of_treatment_',
       'product_',
+      'species',
+      'product__other',
+      'pest_control_date_',
+      'fertiliser_',
+      'fertiliser__other',
+      'fertiliser_date_',
+      'decompacted_date_',
+      'decompacted_',
+      // 'irrigation_present_',
+      // 'irrigation_sufficient_',
+      'work_order_',
+      'maintenance_date_',
+      'responsible_team_',
+      'detected_by_ml',
+      // 'special_irrigation'
+      ]
+
+      fieldArray.forEach(function(dataName) 
+      
+      {
+      SETREADONLY(dataName, true);
+      });
+
+      // SETSTATUSFILTER(['Re-inspection - إعادة التفتيش','Urgent irrigation - للري بشكل عاجل']);
+      
+      var config = {
+        //auto_sync_enabled: true,
+        //auto_location_enabled: true,
+        //auto_location_minimum_accuracy: 20,
+        manual_location_enabled: true,
+        //media_gallery_enabled: false,
+        //media_capture_enabled: true,
+        //photo_quality: '2048',
+        //video_quality: '720p',
+        //drafts_enabled: false,
+        //edit_locations_enabled: true,
+        //edit_durations_enabled: true
+        };
+      SETFORMATTRIBUTES(config);
+      } else {
+      
+      // restrict contractor access to fields
+      // contractor can set status and fill general data
+      
+      var fieldArray = ['tree_id_',
+      'type_of_treatment_',
+      'product_',
+      'species',
       'product__other',
       'pest_control_date_',
       'fertiliser_',
@@ -55,11 +106,15 @@ ON('new-record', function(event) {
       'responsible_team_',
       'detected_by_ml',
       'special_irrigation']
+
       fieldArray.forEach(function(dataName) 
+      
       {
       SETREADONLY(dataName, true);
       });
+      
       SETSTATUSFILTER(['Re-inspection - إعادة التفتيش','Urgent irrigation - للري بشكل عاجل']);
+      
       var config = {
         //auto_sync_enabled: true,
         //auto_location_enabled: true,
@@ -75,6 +130,7 @@ ON('new-record', function(event) {
         };
       SETFORMATTRIBUTES(config);
    }
+ };
 if (ISROLE(treenumber))
     {
       // restrict contractor access to fields
@@ -97,11 +153,14 @@ if (ISROLE(treenumber))
       'responsible_team_',
       'detected_by_ml',
       'special_irrigation']
+
       fieldArray.forEach(function(dataName) 
       {
       SETREADONLY(dataName, true);
       });
+      
       SETSTATUSHIDDEN(true);
+      
       var config = {
         //auto_sync_enabled: true,
         //auto_location_enabled: true,
@@ -156,8 +215,55 @@ if (ISROLE(treenumber))
 
 ON('validate-record', function(event) {
   // if current role is not admin, inspector but [ADA] Site
-  if (ISROLE(contractor))
-    {
+  if (ISROLE(contractor)) { 
+
+    if(ISSELECTED($species, 'Phoenix dactylifera - نخيل البلح')){
+
+      // restrict contractor access to fields
+      // contractor can set status and fill general data
+      
+      var fieldArray = ['tree_id_',
+      'type_of_treatment_',
+      'product_','species',
+      'product__other',
+      'pest_control_date_',
+      'fertiliser_',
+      'fertiliser__other',
+      'fertiliser_date_',
+      'decompacted_date_',
+      'decompacted_',
+      // 'irrigation_present_',
+      // 'irrigation_sufficient_',
+      'work_order_',
+      'maintenance_date_',
+      'responsible_team_',
+      'detected_by_ml',
+      // 'special_irrigation'
+      ]
+
+      fieldArray.forEach(function(dataName) 
+      
+      {
+      SETREADONLY(dataName, true);
+      });
+
+      // SETSTATUSFILTER(['Re-inspection - إعادة التفتيش','Urgent irrigation - للري بشكل عاجل']);
+      
+      var config = {
+        //auto_sync_enabled: true,
+        //auto_location_enabled: true,
+        //auto_location_minimum_accuracy: 20,
+        manual_location_enabled: true,
+        //media_gallery_enabled: false,
+        //media_capture_enabled: true,
+        //photo_quality: '2048',
+        //video_quality: '720p',
+        //drafts_enabled: false,
+        //edit_locations_enabled: true,
+        //edit_durations_enabled: true
+        };
+      SETFORMATTRIBUTES(config);
+      } else {
       // restrict contractor access to fields
       // contractor can set status and fill general data
       var fieldArray = ['tree_id_',
@@ -186,13 +292,16 @@ ON('validate-record', function(event) {
         'maintenance_date_',
         'responsible_team_', 'detected_by_ml',
         'special_irrigation']
+
       fieldArray.forEach(function(dataName) 
+      
       {
       SETREADONLY(dataName, true);
       });
 
       // limit status selection
       SETSTATUSFILTER(['Urgent irrigation - للري بشكل عاجل','Irrigation check needed - فحص الري مطلوب']);
+      
       var config = {
         //auto_sync_enabled: true,
         //auto_location_enabled: true,
@@ -208,27 +317,29 @@ ON('validate-record', function(event) {
         };
       SETFORMATTRIBUTES(config);
 
-      //validate loaction
-      lat = LATITUDE();
-      lng = LONGITUDE();
-      var location = CURRENTLOCATION();
-      if (!location) 
-      {
-      //ALERT('No Location Available');
-      return;
-      }
-      var latitude = location.latitude;
-      var longitude = location.longitude;
-      var minLatitude = lat - 0.000300;
-      var maxLatitude = lat + 0.000300;
-      var minLongitude = lng - 0.000300;
-      var maxLongitude = lng + 0.000300;
+      // //validate loaction
+      // lat = LATITUDE();
+      // lng = LONGITUDE();
+      // var location = CURRENTLOCATION();
+      // if (!location) 
+      // {
+      // //ALERT('No Location Available');
+      // return;
+      // }
+      // var latitude = location.latitude;
+      // var longitude = location.longitude;
+      // var minLatitude = lat - 0.000300;
+      // var maxLatitude = lat + 0.000300;
+      // var minLongitude = lng - 0.000300;
+      // var maxLongitude = lng + 0.000300;
       
-      if (!(latitude <= maxLatitude && latitude >= minLatitude && longitude <= maxLongitude && longitude >= minLongitude)) 
-      {
-        INVALID("It looks like you are not close enough to the issue to make changes. - لست بقرب الموقع لإضافة ملاحظة");
-      }
+      // if (!(latitude <= maxLatitude && latitude >= minLatitude && longitude <= maxLongitude && longitude >= minLongitude)) 
+      // {
+      //   INVALID("It looks like you are not close enough to the issue to make changes. - لست بقرب الموقع لإضافة ملاحظة");
+      // }
    }
+ };
+
    if (ISROLE(treenumber))
     {
       // restrict contractor access to fields
@@ -337,29 +448,86 @@ ON('validate-record', function(event) {
 
 ON('edit-record', function(event) {
   // if current role is not admin, inspector but [ADA] Site
-  if (ISROLE(contractor))
-    {
+  if (ISROLE(contractor)) {
+
+    if(ISSELECTED($species, 'Phoenix dactylifera - نخيل البلح')){ 
+
       // restrict contractor access to fields
       // contractor can set status and fill general data
+      
       var fieldArray = ['tree_id_',
-        'area_code_',
-        'species',
-        // 'photos',
-        'dbh_cm_','height_m','spread_m','tree_age_','comments','health','structure_','type_of_treatment_',
+      'type_of_treatment_',
       'product_',
-      'product__other',
+      'product__other','species',
       'pest_control_date_',
       'fertiliser_',
       'fertiliser__other',
       'fertiliser_date_',
       'decompacted_date_',
       'decompacted_',
-      'irrigation_present_',
-      'irrigation_sufficient_',
+      // 'irrigation_present_',
+      // 'irrigation_sufficient_',
       'work_order_',
       'maintenance_date_',
-      'responsible_team_', 'detected_by_ml',
-      'special_irrigation']
+      'responsible_team_',
+      'detected_by_ml',
+      // 'special_irrigation'
+      ]
+
+      fieldArray.forEach(function(dataName) 
+      
+      {
+      SETREADONLY(dataName, true);
+      });
+
+      // SETSTATUSFILTER(['Re-inspection - إعادة التفتيش','Urgent irrigation - للري بشكل عاجل']);
+      
+      var config = {
+        //auto_sync_enabled: true,
+        //auto_location_enabled: true,
+        //auto_location_minimum_accuracy: 20,
+        manual_location_enabled: true,
+        //media_gallery_enabled: false,
+        //media_capture_enabled: true,
+        //photo_quality: '2048',
+        //video_quality: '720p',
+        //drafts_enabled: false,
+        //edit_locations_enabled: true,
+        //edit_durations_enabled: true
+        };
+      SETFORMATTRIBUTES(config);
+      } else {
+      // restrict contractor access to fields
+      // contractor can set status and fill general data
+      var fieldArray = ['tree_id_',
+        'area_code_',
+        'species',
+        // 'photos',
+        'dbh_cm_',
+        'height_m',
+        'spread_m',
+        'tree_age_',
+        'comments',
+        'health',
+        'structure_',
+        'type_of_treatment_',
+        'product_',
+        'product__other',
+        'pest_control_date_',
+        'species',
+        'fertiliser_',
+        'fertiliser__other',
+        'fertiliser_date_',
+        'decompacted_date_',
+        'decompacted_',
+        'irrigation_present_',
+        'irrigation_sufficient_',
+        'work_order_',
+        'maintenance_date_',
+        'responsible_team_',
+        'detected_by_ml',
+        'special_irrigation'
+      ]
       fieldArray.forEach(function(dataName) 
       {
       SETREADONLY(dataName, true);
@@ -372,37 +540,40 @@ ON('edit-record', function(event) {
         //auto_sync_enabled: true,
         //auto_location_enabled: true,
         //auto_location_minimum_accuracy: 20,
-        manual_location_enabled: false,
+        manual_location_enabled: true,
         //media_gallery_enabled: false,
         //media_capture_enabled: true,
         //photo_quality: '2048',
         //video_quality: '720p',
         //drafts_enabled: false,
-        edit_locations_enabled: false,
+        edit_locations_enabled: true
         //edit_durations_enabled: true
         };
+
       SETFORMATTRIBUTES(config);
-      //validate loaction
-      lat = LATITUDE();
-      lng = LONGITUDE();
-      var location = CURRENTLOCATION();
-      if (!location) 
-      {
-      //ALERT('No Location Available');
-      return;
-      }
-      var latitude = location.latitude;
-      var longitude = location.longitude;
-      var minLatitude = lat - 0.000300;
-      var maxLatitude = lat + 0.000300;
-      var minLongitude = lng - 0.000300;
-      var maxLongitude = lng + 0.000300;
       
-      if (!(latitude <= maxLatitude && latitude >= minLatitude && longitude <= maxLongitude && longitude >= minLongitude)) 
-      {
-        INVALID("It looks like you are not close enough to the issue to make changes. - لست بقرب الموقع لإضافة ملاحظة");
-      }
+      // //validate loaction
+      // lat = LATITUDE();
+      // lng = LONGITUDE();
+      // var location = CURRENTLOCATION();
+      // if (!location) 
+      // {
+      // //ALERT('No Location Available');
+      // return;
+      // }
+      // var latitude = location.latitude;
+      // var longitude = location.longitude;
+      // var minLatitude = lat - 0.000300;
+      // var maxLatitude = lat + 0.000300;
+      // var minLongitude = lng - 0.000300;
+      // var maxLongitude = lng + 0.000300;
+      
+      // if (!(latitude <= maxLatitude && latitude >= minLatitude && longitude <= maxLongitude && longitude >= minLongitude)) 
+      // {
+      //   INVALID("It looks like you are not close enough to the issue to make changes. - لست بقرب الموقع لإضافة ملاحظة");
+      // }
    }
+ }
 if (ISROLE(treenumber))
     {
       // restrict contractor access to fields
