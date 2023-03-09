@@ -1,20 +1,21 @@
 var config = {
-        //auto_sync_enabled: true,
-        auto_location_enabled: false,
-        auto_location_minimum_accuracy: 20,
-        //manual_location_enabled: false,
-        //media_gallery_enabled: false,
-        //media_capture_enabled: true,
-        //photo_quality: '2048',
-        //video_quality: '720p',
-        drafts_enabled: false,
-        //edit_locations_enabled: true,
-        //edit_durations_enabled: true
-        };
+  //auto_sync_enabled: true,
+  auto_location_enabled: false,
+  auto_location_minimum_accuracy: 20,
+  //manual_location_enabled: false,
+  //media_gallery_enabled: false,
+  //media_capture_enabled: true,
+  //photo_quality: '2048',
+  //video_quality: '720p',
+  drafts_enabled: false,
+  //edit_locations_enabled: true,
+  //edit_durations_enabled: true
+};
+
 SETFORMATTRIBUTES(config);
 
-//change status to 'action required' when maintenance action is not empty
-//function changeStatus(event) {
+// change status to 'action required' when maintenance action is not empty
+// function changeStatus(event) {
 //  if (event.value) {
 //    // There is a value, so set the status
 //    SETSTATUS('Action Required - عمل')
@@ -27,9 +28,9 @@ SETFORMATTRIBUTES(config);
 //ON('change', 'maintenance_action', changeStatus);
 
 var admin = ['[BP] Inspector','Owner'];
-var inspector = ['[ADA] Site Office'];
+// var inspector = ['[ADA] Site Office'];
 var contractor = ['[CON] Site Inspector'];
-var treenumber = ['[ADA][DQ] Tree Number'];
+// var treenumber = ['[ADA][DQ] Tree Number'];
 
 //allow user [ADA] Site Inspector to NOT create record
 ON('new-record', function(event) {
@@ -45,24 +46,26 @@ ON('new-record', function(event) {
       // restrict contractor access to fields
       // contractor can set status and fill general data
       
-      var fieldArray = ['tree_id_',
-      'type_of_treatment_',
-      'product_',
-      'species',
-      'product__other',
-      'pest_control_date_',
-      'fertiliser_',
-      'fertiliser__other',
-      'fertiliser_date_',
-      'decompacted_date_',
-      'decompacted_',
-      // 'irrigation_present_',
-      // 'irrigation_sufficient_',
-      //'work_order_',
-      // 'maintenance_date_',
-      // 'responsible_team_',
-      'detected_by_ml',
-      // 'special_irrigation'
+      var fieldArray = [
+        'tree_id_',
+        'type_of_treatment_',
+        'product_',
+        'species',
+        'product__other',
+        'pest_control_date_',
+        'fertiliser_',
+        'fertiliser__other',
+        'fertiliser_date_',
+        'decompacted_date_',
+        'decompacted_',
+        'removal_approved_',
+        // 'irrigation_present_',
+        // 'irrigation_sufficient_',
+        //'work_order_',
+        // 'maintenance_date_',
+        // 'responsible_team_',
+        'detected_by_ml',
+        // 'special_irrigation'
       ]
 
       fieldArray.forEach(function(dataName) 
@@ -71,7 +74,8 @@ ON('new-record', function(event) {
       SETREADONLY(dataName, true);
       });
         
-      SETSTATUSFILTER(['Urgent irrigation - للري بشكل عاجل',
+      SETSTATUSFILTER([
+        'Urgent irrigation - للري بشكل عاجل',
         'Irrigation needed - بحاجة للري',
         'Missing tree - شجرة مفقودة',
         'Dead tree - شجرة ميتة',
@@ -103,24 +107,26 @@ ON('new-record', function(event) {
       // restrict contractor access to fields
       // contractor can set status and fill general data
       
-      var fieldArray = ['tree_id_',
-      'type_of_treatment_',
-      'product_',
-      'species',
-      'product__other',
-      'pest_control_date_',
-      'fertiliser_',
-      'fertiliser__other',
-      'fertiliser_date_',
-      'decompacted_date_',
-      'decompacted_',
-      'irrigation_present_',
-      'irrigation_sufficient_',
-      // 'work_order_',
-      // 'maintenance_date_',
-      // 'responsible_team_',
-      'detected_by_ml',
-      'special_irrigation']
+      var fieldArray = [
+        'tree_id_',
+        'type_of_treatment_',
+        'product_',
+        'species',
+        'product__other',
+        'pest_control_date_',
+        'fertiliser_',
+        'fertiliser__other',
+        'fertiliser_date_',
+        'decompacted_date_',
+        'decompacted_',
+        'irrigation_present_',
+        'irrigation_sufficient_',
+        'removal_approved_',
+        // 'work_order_',
+        // 'maintenance_date_',
+        // 'responsible_team_',
+        'detected_by_ml',
+        'special_irrigation']
 
       fieldArray.forEach(function(dataName) 
       
@@ -198,7 +204,8 @@ ON('new-record', function(event) {
    //  {
    //    // restrict inspector access to fields
    //    // inspector can set status and fill general data
-   //    var fieldArray = ['tree_id_',
+   //    var fieldArray = [
+   //       'tree_id_',
    //      'type_of_treatment_',
    //      'product_',
    //      'product__other',
@@ -242,24 +249,26 @@ ON('validate-record', function(event) {
       // restrict contractor access to fields
       // contractor can set status and fill general data
       
-      var fieldArray = ['tree_id_',
-      'type_of_treatment_',
-      'product_',
-      'species',
-      'product__other',
-      'pest_control_date_',
-      'fertiliser_',
-      'fertiliser__other',
-      'fertiliser_date_',
-      'decompacted_date_',
-      'decompacted_',
-      // 'irrigation_present_',
-      // 'irrigation_sufficient_',
-      //'work_order_',
-      // 'maintenance_date_',
-      // 'responsible_team_',
-      'detected_by_ml',
-      // 'special_irrigation'
+      var fieldArray = [
+        'tree_id_',
+        'type_of_treatment_',
+        'product_',
+        'species',
+        'product__other',
+        'pest_control_date_',
+        'fertiliser_',
+        'fertiliser__other',
+        'fertiliser_date_',
+        'decompacted_date_',
+        'decompacted_',
+        'removal_approved_',
+        // 'irrigation_present_',
+        // 'irrigation_sufficient_',
+        //'work_order_',
+        // 'maintenance_date_',
+        // 'responsible_team_',
+        'detected_by_ml',
+        // 'special_irrigation'
       ]
 
       fieldArray.forEach(function(dataName) 
@@ -268,7 +277,8 @@ ON('validate-record', function(event) {
       SETREADONLY(dataName, true);
       });
         
-      SETSTATUSFILTER(['Urgent irrigation - للري بشكل عاجل',
+      SETSTATUSFILTER([
+        'Urgent irrigation - للري بشكل عاجل',
         'Irrigation needed - بحاجة للري',
         'Missing tree - شجرة مفقودة',
         'Dead tree - شجرة ميتة',
@@ -300,24 +310,26 @@ ON('validate-record', function(event) {
       // restrict contractor access to fields
       // contractor can set status and fill general data
       
-      var fieldArray = ['tree_id_',
-      'type_of_treatment_',
-      'product_',
-      'species',
-      'product__other',
-      'pest_control_date_',
-      'fertiliser_',
-      'fertiliser__other',
-      'fertiliser_date_',
-      'decompacted_date_',
-      'decompacted_',
-      'irrigation_present_',
-      'irrigation_sufficient_',
-      // 'work_order_',
-      // 'maintenance_date_',
-      // 'responsible_team_',
-      'detected_by_ml',
-      'special_irrigation']
+      var fieldArray = [
+        'tree_id_',
+        'type_of_treatment_',
+        'product_',
+        'species',
+        'product__other',
+        'pest_control_date_',
+        'fertiliser_',
+        'fertiliser__other',
+        'fertiliser_date_',
+        'decompacted_date_',
+        'decompacted_',
+        'irrigation_present_',
+        'irrigation_sufficient_',
+        'removal_approved_',
+        // 'work_order_',
+        // 'maintenance_date_',
+        // 'responsible_team_',
+        'detected_by_ml',
+        'special_irrigation']
 
       fieldArray.forEach(function(dataName) 
       
@@ -460,24 +472,26 @@ ON('edit-record', function(event) {
       // restrict contractor access to fields
       // contractor can set status and fill general data
       
-      var fieldArray = ['tree_id_',
-      'type_of_treatment_',
-      'product_',
-      'product__other',
-      'species',
-      'pest_control_date_',
-      'fertiliser_',
-      'fertiliser__other',
-      'fertiliser_date_',
-      'decompacted_date_',
-      'decompacted_',
-      // 'irrigation_present_',
-      // 'irrigation_sufficient_',
-      // 'work_order_',
-      // 'maintenance_date_',
-      // 'responsible_team_',
-      'detected_by_ml',
-      // 'special_irrigation'
+      var fieldArray = [
+        'tree_id_',
+        'type_of_treatment_',
+        'product_',
+        'product__other',
+        'species',
+        'pest_control_date_',
+        'fertiliser_',
+        'fertiliser__other',
+        'fertiliser_date_',
+        'decompacted_date_',
+        'removal_approved_',
+        'decompacted_',
+        // 'irrigation_present_',
+        // 'irrigation_sufficient_',
+        // 'work_order_',
+        // 'maintenance_date_',
+        // 'responsible_team_',
+        'detected_by_ml',
+        // 'special_irrigation'
       ]
 
       fieldArray.forEach(function(dataName) 
@@ -486,7 +500,8 @@ ON('edit-record', function(event) {
       SETREADONLY(dataName, true);
       });
 
-      SETSTATUSFILTER(['Urgent irrigation - للري بشكل عاجل',
+      SETSTATUSFILTER([
+        'Urgent irrigation - للري بشكل عاجل',
         'Irrigation needed - بحاجة للري',
         'Missing tree - شجرة مفقودة',
         'Dead tree - شجرة ميتة',
@@ -537,6 +552,7 @@ ON('edit-record', function(event) {
         'fertiliser__other',
         'fertiliser_date_',
         'decompacted_date_',
+        'removal_approved_',
         'decompacted_',
         'irrigation_present_',
         'irrigation_sufficient_',
