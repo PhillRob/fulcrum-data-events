@@ -32,36 +32,41 @@ var admin = ['[BP] Inspector','Owner'];
 var contractor = ['[CON] Site Inspector'];
 // var treenumber = ['[ADA][DQ] Tree Number'];
 
-//allow user [ADA] Site Inspector to NOT create record
+//
 ON('new-record', function(event) {
   
   // if current role is not admin, inspector but '[CON] Site Inspector'
-
+  
   if (ISROLE(contractor)) {
-
-      // when looking at palms
-      if(ISSELECTED($species, 'Phoenix dactylifera - نخيل البلح')) 
-      {
-
+      
       // restrict contractor access to fields
       // contractor can set status and fill general data
       
       var fieldArray = [
-        'tree_id_',
+        // 'tree_id_',
+        // 'area_code_',
+        // 'species',
+        // 'photos',
+        // 'dbh_cm_',
+        // 'height_m',
+        // 'spread_m',
+        // 'tree_age_',
+        // 'comments',
+        // 'health',
+        // 'structure_',
         'type_of_treatment_',
         'product_',
-        'species',
         'product__other',
         'pest_control_date_',
         'fertiliser_',
         'fertiliser__other',
         'fertiliser_date_',
         'decompacted_date_',
-        'decompacted_',
         'removal_approved_',
+        'decompacted_',
         // 'irrigation_present_',
         // 'irrigation_sufficient_',
-        //'work_order_',
+        // 'work_order_',
         // 'maintenance_date_',
         // 'responsible_team_',
         'detected_by_ml',
@@ -75,16 +80,7 @@ ON('new-record', function(event) {
       });
         
       SETSTATUSFILTER([
-        'Urgent irrigation - للري بشكل عاجل',
-        'Irrigation needed - بحاجة للري',
-        'Missing tree - شجرة مفقودة',
-        'Dead tree - شجرة ميتة',
-        'Unsuitable tree location - شجرة غير ملائمة',
-        'Action Required - مطلوب التدخل',
-        'No Action Required - لا حاجة لأي إجراء',
-        'Surveyed - تمت المعاينة',
-        'Inspection needed - بحاجة للمعاينة',
-        'Irrigation check needed - فحص الري مطلوب ']);
+        'Surveyed - تمت المعاينة']);
       
       var config = {
         //auto_sync_enabled: true,
@@ -101,56 +97,7 @@ ON('new-record', function(event) {
         };
       SETFORMATTRIBUTES(config);
       
-      } else {
       
-      // Not palms
-      // restrict contractor access to fields
-      // contractor can set status and fill general data
-      
-      var fieldArray = [
-        'tree_id_',
-        'type_of_treatment_',
-        'product_',
-        'species',
-        'product__other',
-        'pest_control_date_',
-        'fertiliser_',
-        'fertiliser__other',
-        'fertiliser_date_',
-        'decompacted_date_',
-        'decompacted_',
-        'irrigation_present_',
-        'irrigation_sufficient_',
-        'removal_approved_',
-        // 'work_order_',
-        // 'maintenance_date_',
-        // 'responsible_team_',
-        'detected_by_ml',
-        'special_irrigation']
-
-      fieldArray.forEach(function(dataName) 
-      
-      {
-      SETREADONLY(dataName, true);
-      });
-      
-      SETSTATUSFILTER(['Irrigation check needed - فحص الري مطلوب ','Urgent irrigation - للري بشكل عاجل']);
-      
-      var config = {
-        //auto_sync_enabled: true,
-        //auto_location_enabled: true,
-        //auto_location_minimum_accuracy: 20,
-        manual_location_enabled: true,
-        //media_gallery_enabled: false,
-        //media_capture_enabled: true,
-        //photo_quality: '2048',
-        //video_quality: '720p',
-        //drafts_enabled: false,
-        //edit_locations_enabled: true,
-        //edit_durations_enabled: true
-        };
-      SETFORMATTRIBUTES(config);
-   }
  };
 
 // if (ISROLE(treenumber))
@@ -251,20 +198,29 @@ ON('validate-record', function(event) {
       
       var fieldArray = [
         'tree_id_',
+        'area_code_',
+        'species',
+        // 'photos',
+        // 'dbh_cm_',
+        // 'height_m',
+        // 'spread_m',
+        // 'tree_age_',
+        // 'comments',
+        // 'health',
+        // 'structure_',
         'type_of_treatment_',
         'product_',
-        'species',
         'product__other',
         'pest_control_date_',
         'fertiliser_',
         'fertiliser__other',
         'fertiliser_date_',
         'decompacted_date_',
-        'decompacted_',
         'removal_approved_',
+        'decompacted_',
         // 'irrigation_present_',
         // 'irrigation_sufficient_',
-        //'work_order_',
+        // 'work_order_',
         // 'maintenance_date_',
         // 'responsible_team_',
         'detected_by_ml',
@@ -312,24 +268,35 @@ ON('validate-record', function(event) {
       
       var fieldArray = [
         'tree_id_',
+        'area_code_',
+        'species',
+        // 'photos',
+        'dbh_cm_',
+        'height_m',
+        'spread_m',
+        'tree_age_',
+        // 'comments',
+        'health',
+        'structure_',
         'type_of_treatment_',
         'product_',
-        'species',
         'product__other',
         'pest_control_date_',
+        'species',
         'fertiliser_',
         'fertiliser__other',
         'fertiliser_date_',
         'decompacted_date_',
+        'removal_approved_',
         'decompacted_',
         'irrigation_present_',
         'irrigation_sufficient_',
-        'removal_approved_',
         // 'work_order_',
         // 'maintenance_date_',
         // 'responsible_team_',
         'detected_by_ml',
-        'special_irrigation']
+        'special_irrigation'
+        ]
 
       fieldArray.forEach(function(dataName) 
       
@@ -474,10 +441,19 @@ ON('edit-record', function(event) {
       
       var fieldArray = [
         'tree_id_',
+        'area_code_',
+        'species',
+        // 'photos',
+        // 'dbh_cm_',
+        // 'height_m',
+        // 'spread_m',
+        // 'tree_age_',
+        // 'comments',
+        // 'health',
+        // 'structure_',
         'type_of_treatment_',
         'product_',
         'product__other',
-        'species',
         'pest_control_date_',
         'fertiliser_',
         'fertiliser__other',
@@ -491,7 +467,7 @@ ON('edit-record', function(event) {
         // 'maintenance_date_',
         // 'responsible_team_',
         'detected_by_ml',
-        // 'special_irrigation'
+        'special_irrigation'
       ]
 
       fieldArray.forEach(function(dataName) 
@@ -540,7 +516,7 @@ ON('edit-record', function(event) {
         'height_m',
         'spread_m',
         'tree_age_',
-        'comments',
+        // 'comments',
         'health',
         'structure_',
         'type_of_treatment_',
@@ -568,7 +544,8 @@ ON('edit-record', function(event) {
       });
       
       // limit status selection
-      SETSTATUSFILTER(['Urgent irrigation - للري بشكل عاجل','Irrigation check needed - فحص الري مطلوب']);
+      SETSTATUSFILTER(['Urgent irrigation - للري بشكل عاجل',
+        'Irrigation check needed - فحص الري مطلوب']);
 
       //turn location editing off
       var config = {
