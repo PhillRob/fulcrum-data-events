@@ -45,10 +45,15 @@ arr = [
     },
     {    "shrubgenus": "Tecoma",
         "habit": "Shrub - شجيرة"
+    },
+    {
+        "shrubgenus": "Lantania",
+        "habit": "Shrub - شجيرة"
+    },
+    {    "shrubgenus": "Vitex",
+        "habit": "Shrub - شجيرة"
     }
 ];
-
-
 
 
 function contains(arr, key, val) {
