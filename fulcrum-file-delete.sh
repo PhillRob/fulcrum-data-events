@@ -11,7 +11,7 @@ do
 	let COUNT=COUNT+1
 	echo $COUNT
 	# echo ${csv_line[0]}.jpg
-	find /Users/philipp/Downloads/gr_tree_assessment . -name ${csv_line[0]}.jpg -type f -exec rm -v {} \;
+	find /Users/philipp/Downloads/gr_tree_assessment_2 . -name ${csv_line[0]}.jpg -type f -exec rm -v {} \;
 	# find -not -name ${csv_line[0]}.jpg -type f -exec rm -v {} \;
 done < $INPUT
 
