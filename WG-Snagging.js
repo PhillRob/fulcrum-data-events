@@ -1,4 +1,4 @@
-// data events for fulcrum app [GR] Snagging (ae9c99e0-0f90-4439-8094-1a9f9943171c)
+// data events for fulcrum app [WG] Snagging
 // version 0.5
 
 var BP = ['[GR] Road Site Inspector','[BP] Inspector','Owner','[BP] admin L2']; 
